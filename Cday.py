@@ -33,11 +33,13 @@ def add_task():
             dead_line = input("Enter deadline\n>")
             today = datetime.today()
             if task_input == ' ' or datetime.strptime(dead_line, '%d-%m-%Y %H:%M') <= today:
-                print("\nSchedule appropriately!")
+                print("\nMake sure the deadline is in this format - 'Date-Month-Year Hour:Minute' and"
+                      " Schedule appropriately!")
                 continue
             new_row = Table(task=task_input, deadline=datetime.strptime(dead_line, '%d-%m-%Y %H:%M'), completed='False')
         except:
-            print("\nSchedule appropriately!")
+            print("\nMake sure the deadline is in this format - 'Date-Month-Year Hour:Minute' and"
+                  " Schedule appropriately!")
             continue
         session.add(new_row)
         session.commit()
@@ -170,12 +172,14 @@ def change_deadline(rows, c):
                 today = datetime.today()
                 if c == 'False' and (datetime.strptime(new_deadline, '%d-%m-%Y %H:%M') <= today
                                      or datetime.strptime(new_deadline, '%d-%m-%Y %H:%M') == actual_deadline):
-                    print("\nSchedule appropriately!\n")
+                    print("\nMake sure the deadline is in this format - 'Date-Month-Year Hour:Minute' and"
+                          " Schedule appropriately!")
                     continue
                 new_row = Table(task=task_input, deadline=new_deadline if c == 'True'
                           else datetime.strptime(new_deadline, '%d-%m-%Y %H:%M'), completed=c)
             except:
-                print("\nSchedule appropriately!\n")
+                print("\nMake sure the deadline is in this format - 'Date-Month-Year Hour:Minute' and"
+                      " Schedule appropriately!")
                 continue
             session.add(new_row)
             session.commit()
